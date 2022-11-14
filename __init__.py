@@ -1,5 +1,5 @@
 import sys
-sys.path.append("C:\\Users\\erosi\\OneDrive\\문서\\GitHub\\yeji")
+sys.path.append("저장소 위치")
 
 from kiwoom.kiwoom import *
 from PyQt5.QtWidgets import *
