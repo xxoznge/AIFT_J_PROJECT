@@ -1,5 +1,5 @@
 import sys
-sys.path.append("C:\Users\erosi\OneDrive\바탕 화면\self")
+sys.path.append("C:\\Users\\erosi\\OneDrive\\문서\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
 from PyQt5.QtWidgets import *
