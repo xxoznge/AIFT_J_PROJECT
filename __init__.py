@@ -1,5 +1,5 @@
 import sys
-sys.path.append("저장소 위치")
+sys.path.append("C:\\Users\\SOJUNG\\Documents\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
 from PyQt5.QtWidgets import *
