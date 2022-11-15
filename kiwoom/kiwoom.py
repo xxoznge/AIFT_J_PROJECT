@@ -16,6 +16,7 @@ class Kiwoom(QAxWidget):
         ####### event loop를 실행하기 위한 변수모음
         self.login_event_loop = QEventLoop() # 예수금 118p / 로그인 요청용 이벤트 루프
         #########################################
+        self.detail_account_info_event_loop = QEventLoop()
 
         ########### 전체 종목 관리
         self.all_stock_dict = {}
@@ -53,9 +54,6 @@ class Kiwoom(QAxWidget):
         self.signal_login_commConnect() #로그인 시도 함수 실행
         self.get_account_info() #계좌번호 가져오기
         self.detail_account_info()
-        self.trdata_slot()
-
-
         self.condition_event_slot()
         self.condition_signal()
         #########################################
@@ -98,6 +96,10 @@ class Kiwoom(QAxWidget):
         self.dynamicCall("SetInputValue(QString, QString)", "비밀번호입력매체구분", "00")
         self.dynamicCall("SetInputValue(QString, QString)", "조회구분", "2")
         self.dynamicCall("CommRqData(QString, QString, int, QString)", "예수금상세현황요청", "opw00001", sPrevNext, self.screen_my_info)
+
+        self.detail_account_info_event_loop = QEventLoop()
+        self.detail_account_info_event_loop.exec_()
+        
         
       
 
@@ -175,4 +177,3 @@ class Kiwoom(QAxWidget):
 
         elif strType == "D":
             self.logging.logger.debug("종목코드: %s, 종목이탈: %s" % (strCode, strType))
-
