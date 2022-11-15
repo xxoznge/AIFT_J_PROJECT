@@ -14,7 +14,7 @@ class Kiwoom(QAxWidget):
         self.logging.logger.debug("Kiwoom() class start.")
 
         ####### event loop를 실행하기 위한 변수모음
-        self.login_event_loop = None #로그인을 이벤트 루프 안에서 실행하도록 만들기 위해 선언한 변수
+        self.login_event_loop = QEventLoop() # 예수금 118p / 로그인 요청용 이벤트 루프
         #########################################
 
         ########### 전체 종목 관리
@@ -22,7 +22,12 @@ class Kiwoom(QAxWidget):
         ###########################
 
 
-        ####### 계좌 관련된 변수
+        ####### 계좌 관련된 변수 118p
+        self.account_num = None
+        self.deposit = 0 # 예수금
+        self.use_money = 0
+        self.use_money_percent = 0.5
+        self.output_deposit = 0 # 출력 가능 금액
         self.account_stock_dict = {}
         self.not_account_stock_dict = {}
         ########################################
@@ -39,6 +44,7 @@ class Kiwoom(QAxWidget):
 
         ####### 요청 스크린 번호
         self.screen_start_stop_real = "1000" #장 시작/종료 실시간 스크린번호
+        self.screen_my_info = "2000" # 계좌 관련 스크린 번호 118p
         ########################################
 
         ######### 초기 셋팅 함수들 바로 실행
@@ -46,6 +52,9 @@ class Kiwoom(QAxWidget):
         self.event_slots() #키움과 연결하기 위한 signal / slot 모음 함수 실행
         self.signal_login_commConnect() #로그인 시도 함수 실행
         self.get_account_info() #계좌번호 가져오기
+        self.detail_account_info()
+        self.trdata_slot()
+
 
         self.condition_event_slot()
         self.condition_signal()
@@ -55,9 +64,10 @@ class Kiwoom(QAxWidget):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
 
 
-    def event_slots(self):
-        self.OnEventConnect.connect(self.login_slot)
-        self.OnReceiveMsg.connect(self.msg_slot)
+    def event_slots(self):  # 121p 
+        self.OnEventConnect.connect(self.login_slot)  # 로그인 관련 이벤트
+        self.OnReceiveTrData.connect(self.trdata_slot)  # TR 관련 이벤트
+
 
 
     def signal_login_commConnect(self):
@@ -80,6 +90,32 @@ class Kiwoom(QAxWidget):
 
         # self.logging.logger.debug("계좌번호 : %s" % account_num)
         print("계좌번호 : %s" % account_num)
+
+    def detail_account_info(self, sPrevNext = "0"):   # 예수금 118p
+        print("예수금을 요청하는 부분")
+        self.dynamicCall("SetInputValue(QString, QString)", "계좌번호", self.account_num)
+        self.dynamicCall("SetInputValue(QString, QString)", "비밀번호", "0000")
+        self.dynamicCall("SetInputValue(QString, QString)", "비밀번호입력매체구분", "00")
+        self.dynamicCall("SetInputValue(QString, QString)", "조회구분", "2")
+        self.dynamicCall("CommRqData(QString, QString, int, QString)", "예수금상세현황요청", "opw00001", sPrevNext, self.screen_my_info)
+        
+      
+
+    def trdata_slot(self, sScrNo, sRQName, sTrCode,sRecordName, sPrevNext): # 예수금 122p # 오류
+        if sRQName == "예수금상세현황요청":
+            print("dd")
+            deposit = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, 0, "예수금")
+            self.deposit = int(deposit)
+            use_money = float(self.deposit) * self.use_money_percent
+            self.use_money = int(use_money)
+            self.use_money = self.use_money / 4
+            
+
+            output_deposit = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, 0, "출금가능금액")
+            self.ouput_deposit = int(output_deposit)
+            
+            print("예수금 : %s" % self.output_deposit)
+            self.stop_screen_cancel(self.screen_my_info)
 
 
 

@@ -17,3 +17,112 @@
 2022-11-14 20:26:59,707 | kiwoom.py | 71 | DEBUG -> 정상처리
 2022-11-14 20:26:59,936 | kiwoom.py | 103 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
 2022-11-14 20:26:59,938 | kiwoom.py | 106 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:00:25,574 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:00:42,924 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:03:09,486 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:03:22,283 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:03:46,223 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:04:00,344 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:06:37,836 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:06:47,633 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:07:51,241 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:08:01,205 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:09:36,546 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:09:46,247 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:11:01,626 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:11:11,099 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:11:23,175 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:11:38,686 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:11:46,492 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:12:09,132 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:12:22,950 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:12:32,850 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:13:01,783 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:14:01,057 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:14:10,750 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:14:25,210 | kiwoom.py | 136 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:14:25,211 | kiwoom.py | 139 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:17:04,746 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:17:15,775 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:17:40,426 | kiwoom.py | 136 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:17:40,427 | kiwoom.py | 139 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:20:15,943 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:20:34,169 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:21:29,585 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:21:40,239 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:21:43,558 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:22:27,748 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:23:23,893 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:23:34,545 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:23:48,639 | kiwoom.py | 136 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:23:48,640 | kiwoom.py | 139 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:26:06,472 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:26:20,520 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:26:33,513 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:26:33,514 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:37:31,452 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:37:41,321 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:37:56,837 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:38:06,762 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:38:25,953 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:38:25,954 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:41:06,653 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:41:16,809 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:41:37,950 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:41:48,247 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:42:11,614 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:42:11,615 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:43:48,365 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:44:04,609 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:44:16,106 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:44:16,107 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:45:28,767 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:45:40,611 | kiwoom.py | 79 | DEBUG -> 정상처리
+2022-11-14 21:46:05,222 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 21:46:05,223 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 21:47:17,087 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:47:31,340 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 21:47:48,020 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:47:58,237 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 21:58:19,588 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 21:58:29,338 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:07:19,650 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:07:33,942 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:07:45,413 | kiwoom.py | 137 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:07:45,414 | kiwoom.py | 140 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:13:52,252 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:14:29,654 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:14:45,854 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:14:57,904 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:14:57,905 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:27:55,123 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:28:10,008 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:31:02,767 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:31:12,353 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:34:24,624 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:34:33,997 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:34:45,089 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:34:45,090 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:39:59,247 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:40:19,629 | kiwoom.py | 80 | DEBUG -> 정상처리
+2022-11-14 22:40:34,767 | kiwoom.py | 138 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:40:34,768 | kiwoom.py | 141 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:42:14,360 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:42:23,818 | kiwoom.py | 81 | DEBUG -> 정상처리
+2022-11-14 22:51:07,843 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:51:17,214 | kiwoom.py | 81 | DEBUG -> 정상처리
+2022-11-14 22:51:30,670 | kiwoom.py | 139 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:51:30,671 | kiwoom.py | 142 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:54:22,501 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:54:31,790 | kiwoom.py | 81 | DEBUG -> 정상처리
+2022-11-14 22:54:44,147 | kiwoom.py | 139 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:54:44,148 | kiwoom.py | 142 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:56:10,180 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:56:27,542 | kiwoom.py | 81 | DEBUG -> 정상처리
+2022-11-14 22:56:39,436 | kiwoom.py | 139 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:56:39,437 | kiwoom.py | 142 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 22:59:02,167 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-14 22:59:16,525 | kiwoom.py | 81 | DEBUG -> 정상처리
+2022-11-14 22:59:30,407 | kiwoom.py | 139 | DEBUG -> 호출 성공 여부 1, 호출결과 메시지 [OK] 사용자 조건검색식 읽기
+2022-11-14 22:59:30,407 | kiwoom.py | 142 | DEBUG -> HTS의 조건검색식 이름 가져오기 
+2022-11-14 23:16:40,054 | kiwoom.py | 81 | DEBUG -> 통신연결종료
