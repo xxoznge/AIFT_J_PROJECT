@@ -28,7 +28,7 @@ self.signal_login_commConnect()
 
 > 로그인 후 계좌번호 요청  
 
-'''python  
+ '''python  
 self.get_account_info()  
 '''
 
