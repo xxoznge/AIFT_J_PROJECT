@@ -45,7 +45,7 @@ class Kiwoom(QAxWidget):
         self.detail_account_info() # 예수금 요청 시그널 포함
         self.detail_account_mystock() #계좌평가잔고내역 가져오기
         self.not_concluded_account() # 미체결
-        self.calculator_fnc() # 코스닥갯수
+        self.calculator_fnc() # 코스닥갯수 - 일봉데이터 안가져오려면 주석처리하기
         
 
         #########################################
@@ -257,7 +257,81 @@ class Kiwoom(QAxWidget):
             if sPrevNext == "2":
                 self.day_kiwoom_db(code=code, sPrevNext=sPrevNext)
             else:
+                print("총 일수 %s" % len(self.calcul_data))
+
+                pass_success = False
+
+                # 120일 이평선을 그릴만큼의 데이터가 있는지 확인
+                if self.calcul_data is None or len(self.calcul_data) < 120:
+                    pass_success = False
+                else:
+                    # 데이터가 120일 이상 있으면,
+                    total_price = 0
+                    for value in self.calcul_data[:120]:
+                        total_price += int(value[1])
+
+                    moving_average_price = total_price / 120
+
+                    # 1. 오늘자 주가가 120 이평선에 걸쳐있는지 확인
+                    bottom_stock_price = False
+                    check_price = None
+
+                    if int(self.calcul_data[0][7]) <= moving_average_price <= int(self.calcul_data[0][6]):
+                        print("오늘 주가가 120 이평선에 걸쳐있는지 확인")
+                        bottom_stock_price = True
+                        check_price = int(self.calcul_data[0][6])
+
+                    # 2. 과거 일봉들이 120일 이평선보다 밑에 있는지 확인
+                    prev_low_price = 0  # 과거 일봉 주가
+                    if bottom_stock_price is True:
+                        moving_average_price_prev = 0
+                        price_top_moving = False    # 주가가 이평선보다 위에 위치하는가?
+
+                        idx = 1
+                        while True:
+                            if len(self.calcul_data[idx:]) < 120:   # 120일자가 있는지 계속 확인
+                                print("120일치가 없음")
+                                break
+
+                            total_price = 0
+                            for value in self.calcul_data[idx:120+idx]:
+                                total_price += int(value[1])
+                            moving_average_price_prev = total_price / 120
+
+                            if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 20:
+                                print("20일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
+                                price_top_moving = False
+                                break
+                            elif int(self.calcul_data[idx][7]) > moving_average_price_prev and idx > 20:
+                                print("120일 이평선 위에 있는 일봉 확인")
+                                price_top_moving = True
+                                prev_low_price = int(self.calcul_data[idx][7])  # 이평선위의 일봉 저가 저장
+                                break
+
+                            idx += 1
+
+                        # 해당 부분 이평선이 가장 최근 일자의 이평선 가격보다 낮은지 확인
+                        if price_top_moving is True:
+                            if moving_average_price > moving_average_price_prev and check_price > prev_low_price:
+                                print("포착된 이평선의 가격이 오늘자(최근일자) 이평선 가격보다 낮은 것 확임됨")
+                                print("포착된 부분의 일봉 저가가 오늘자 일봉의 고가보다 낮은지 확임됨")
+                                pass_success = True
+
+                if pass_success is True: # 조건에 통과한 종목 저장
+                    print("조건부 통과됨")
+
+                    code_nm = self.dynamicCall("GetMasterCodeName(QString)", code)
+
+                    f = open("files/condition_stock.txt", "a", encoding="utf8")
+                    f.write("%s\t%s\t%s\n" % (code, code_nm, str(self.calcul_data[0][1])))
+                    f.close()
+
+                elif pass_success is False:
+                    print("조건부 통과 못함")
+
+                self.calcul_data.clear()
                 self.calculator_event_loop.exit()
+
 
     def stop_screen_cancel(self, sScrNo=None):       # 코스닥 종목 요청 함수 159p
         self.dynamicCall("DisconnectRealData(QString)", sScrNo) # 스크린 번호 연결 끊기
