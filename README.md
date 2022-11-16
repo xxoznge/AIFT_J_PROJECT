@@ -17,7 +17,7 @@
 
 > 계좌개설, 공동인증서  
 
-'''
+'''python  
 self.get_ocx_instance()  
 self.event_slots()  
 self.signal_login_commConnect()  
@@ -27,7 +27,7 @@ self.signal_login_commConnect()
 
 > 로그인 후 계좌번호 요청  
 
-'''
+'''python  
 self.get_account_info()  
 '''
 
@@ -36,7 +36,7 @@ self.get_account_info()
 > opw 00001 : 예수금상세현황요청  
 >trdata_slot 오류 해결 ( 자동로그인 필수 )  
 
-'''
+'''python  
 self.detail_account_info()  
 '''
 
@@ -46,7 +46,7 @@ self.detail_account_info()
 > 싱글데이터로 정보 처리, 멀티데이터로 보유 종목 정보 처리  
 > 코스닥 종목 일봉데이터 가져오기  
 
-''' 
+''' python  
 self.detail_account_mystock()  
 self.not_concluded_account()   
 self.calculator_fnc()  
