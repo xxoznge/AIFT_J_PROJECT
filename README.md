@@ -23,6 +23,12 @@ self.event_slots()
 self.signal_login_commConnect()  
 '''
  
+ ```
+python 
+self.get_ocx_instance()  
+self.event_slots()  
+self.signal_login_commConnect()  
+```
 
 ### 3. 계좌번호  ( ~ 2022.11.14 )  
 
