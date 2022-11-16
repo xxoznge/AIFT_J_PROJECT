@@ -17,8 +17,7 @@
 
 > 계좌개설, 공동인증서  
  
- ```
-python 
+ ```python 
 self.get_ocx_instance()  
 self.event_slots()  
 self.signal_login_commConnect()  
