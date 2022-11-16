@@ -1,3 +1,5 @@
+import sys
+import os
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import *
 from config.errorCode import *
@@ -26,6 +28,9 @@ class Kiwoom(QAxWidget):
         self.total_profit_loss_rate = 0.0 #총수익률(%)
         ########################################
 
+        # 종목분석용
+        self.calcul_data = []
+
         ####### 요청 스크린 번호
         self.screen_my_info = "2000" #계좌 관련한 스크린 번호
         self.screen_calculation_stock = "4000" #계산용 스크린 번호
@@ -39,7 +44,9 @@ class Kiwoom(QAxWidget):
 
         self.detail_account_info() # 예수금 요청 시그널 포함
         self.detail_account_mystock() #계좌평가잔고내역 가져오기
-        QTimer.singleShot(5000, self.not_concluded_account) #5초 뒤에 미체결 종목들 가져오기 실행
+        self.not_concluded_account() # 미체결
+        self.calculator_fnc() # 코스닥갯수
+        
 
         #########################################
 
@@ -162,7 +169,7 @@ class Kiwoom(QAxWidget):
                 self.account_stock_dict[code].update({"매입금액": total_chegual_price})
                 self.account_stock_dict[code].update({"매매가능수량": possible_quantity})
 
-            print("sPreNext : %s" % sPrevNext)
+            print("sPreNext : %s" % sPrevNext)      # 미체결 종목 요청 결과를 받기 위한 슬롯 영역 150p
             print("계좌에 가지고 있는 종목은 %s " % rows)
 
             if sPrevNext == "2":
@@ -170,7 +177,7 @@ class Kiwoom(QAxWidget):
             else:
                 self.detail_account_info_event_loop.exit()
 
-        elif sRQName == "실시간미체결요청":
+        elif sRQName == "실시간미체결요청":    # 미체결 종목 요청의 데이터 반환
             rows = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)
 
             for i in range(rows):
@@ -185,7 +192,7 @@ class Kiwoom(QAxWidget):
                 not_quantity = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "미체결수량")
                 ok_quantity = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "체결량")
 
-                code = code.strip()
+                code = code.strip()    # 미체결 종목 정보의 형 변환
                 code_nm = code_nm.strip()
                 order_no = int(order_no.strip())
                 order_status = order_status.strip()
@@ -198,7 +205,7 @@ class Kiwoom(QAxWidget):
                 if order_no in self.not_account_stock_dict:
                     pass
                 else:
-                    self.not_account_stock_dict[order_no] = {}
+                    self.not_account_stock_dict[order_no] = {}   # 주문번호 없으면 딕셔너리 업데이트함 
 
                 self.not_account_stock_dict[order_no].update({'종목코드': code})
                 self.not_account_stock_dict[order_no].update({'종목명': code_nm})
@@ -216,27 +223,56 @@ class Kiwoom(QAxWidget):
 
         elif sRQName == "주식일봉차트조회":
             code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, 0, "종목코드")
-            data = self.dynamicCall("GetCommDataEx(QString, QString)", sTrCode, sRQName)
+            code = code.strip()  # 여기서부터 일봉데이터 가져오기 175p 
+           
+
+            cnt = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)  # 최대 600일
+            
+
+            # data = self.dynamicCall("GetCommDataEx(QString, QString)", sTrCode, sRQName)
+
+            for i in range(cnt):
+                data = []   # 저장할 리스트
+
+                current_price = self.dynamicCall("GetCommData(QString, QString, int, QString", sTrCode, sRQName, i, "현재가")
+                value = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "거래량")
+                trading_value = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "거래대금")
+                date = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "일자")
+                start_price = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "시가")
+                high_price = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "고가")
+                low_price = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "저가")
+
+                data.append("")
+                data.append(current_price.strip())
+                data.append(value.strip())
+                data.append(trading_value.strip())
+                data.append(date.strip())
+                data.append(start_price.strip())
+                data.append(high_price.strip())
+                data.append(low_price.strip())
+                data.append("")
+
+                self.calcul_data.append(data.copy())
 
             if sPrevNext == "2":
                 self.day_kiwoom_db(code=code, sPrevNext=sPrevNext)
             else:
                 self.calculator_event_loop.exit()
 
-    def stop_screen_cancel(self, sScrNo=None):
+    def stop_screen_cancel(self, sScrNo=None):       # 코스닥 종목 요청 함수 159p
         self.dynamicCall("DisconnectRealData(QString)", sScrNo) # 스크린 번호 연결 끊기
 
-    def get_code_list_by_market(self, market_code):
+    def get_code_list_by_market(self, market_code):  # 종목분석, 관련 코드 모아놓기위한
         code_list = self.dynamicCall("GetCodeListByMarket(QString)", market_code)
         code_list = code_list.split(';')[:-1]
         return code_list
 
-    def calculator_fnc(self):
+    def calculator_fnc(self):  # 각 종목의 정보 가져오기
         code_list = self.get_code_list_by_market("10")
 
         print("코스닥 갯수 %s " % len(code_list))
 
-        for idx, code in enumerate(code_list):
+        for idx, code in enumerate(code_list):  # 코스닥 종목 리스트로 반환
             self.dynamicCall("DisconnectRealData(QString)", self.screen_calculation_stock) # 스크린 연결 끊기
             
             print("%s / %s : KOSDAQ Stock Code : %s is updating... " % (idx + 1, len(code_list), code))
