@@ -342,9 +342,9 @@ class Kiwoom(QAxWidget):
         return code_list
 
     def calculator_fnc(self):  # 각 종목의 정보 가져오기
-        code_list = self.get_code_list_by_market("10")
+        code_list = self.get_code_list_by_market("8")
 
-        print("코스닥 갯수 %s " % len(code_list))
+        print("코스피 갯수 %s " % len(code_list))
 
         for idx, code in enumerate(code_list):  # 코스닥 종목 리스트로 반환
             self.dynamicCall("DisconnectRealData(QString)", self.screen_calculation_stock) # 스크린 연결 끊기
@@ -352,7 +352,7 @@ class Kiwoom(QAxWidget):
             print("%s / %s : KOSDAQ Stock Code : %s is updating... " % (idx + 1, len(code_list), code))
             self.day_kiwoom_db(code=code)
 
-    def day_kiwoom_db(self, code=None, date=None, sPrevNext="0"):
+    def day_kiwoom_db(self, code="069500", date=None, sPrevNext="0"):
         QTest.qWait(3600) #3.6초마다 딜레이를 준다.
 
         self.dynamicCall("SetInputValue(QString, QString)", "종목코드", code)
