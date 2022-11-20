@@ -1,0 +1,26 @@
+2022-11-16 15:06:15,825 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 15:07:15,385 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 15:14:33,952 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 15:17:24,252 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 15:17:24,264 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 15:17:24,312 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 15:23:00,823 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 15:23:54,596 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 15:23:54,605 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 15:23:54,627 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 15:32:52,087 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 15:36:34,267 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 15:36:34,278 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 15:36:34,302 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:37:57,747 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 22:38:31,308 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 22:38:31,332 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:38:31,392 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:48:48,075 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 22:49:28,817 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 22:49:28,824 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:49:28,846 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:54:03,177 | kiwoom.py | 14 | DEBUG -> Kiwoom() class start.
+2022-11-16 22:54:29,449 | kiwoom.py | 71 | DEBUG -> 사용자정보교환실패
+2022-11-16 22:54:29,459 | kiwoom.py | 71 | DEBUG -> 통신연결종료
+2022-11-16 22:54:29,487 | kiwoom.py | 71 | DEBUG -> 통신연결종료

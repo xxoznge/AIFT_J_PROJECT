@@ -1,8 +1,10 @@
 import sys
 sys.path.append("C:\\sers\\USER\\AIFT-J\\yeji")
+sys.path.append("C:\\Users\\SOJUNG\\Documents\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
 from PyQt5.QtWidgets import *
+from PyQt5.QAxContainer import *
 
 class Main():
   def __init__(self):

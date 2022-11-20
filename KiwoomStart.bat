@@ -1,7 +1,7 @@
 @ECHO ON
 title Kiwoom Start
 
-cd 저장소 주소
+cd C:\Users\SOJUNG\Documents\GitHub\yeji
 
 call activate py37_32
 python __init__.py
