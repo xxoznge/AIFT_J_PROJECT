@@ -262,26 +262,26 @@ class Kiwoom(QAxWidget):
                 pass_success = False
 
                 # 120일 이평선을 그릴만큼의 데이터가 있는지 확인
-                if self.calcul_data is None or len(self.calcul_data) < 120:
+                if self.calcul_data is None or len(self.calcul_data) < 20:
                     pass_success = False
                 else:
                     # 데이터가 120일 이상 있으면,
                     total_price = 0
-                    for value in self.calcul_data[:120]:
+                    for value in self.calcul_data[:20]:
                         total_price += int(value[1])
 
-                    moving_average_price = total_price / 120
+                    moving_average_price = total_price / 20
 
-                    # 1. 오늘자 주가가 120 이평선에 걸쳐있는지 확인
+                    # 1. 오늘자 주가가 20 이평선에 걸쳐있는지 확인
                     bottom_stock_price = False
                     check_price = None
 
                     if int(self.calcul_data[0][7]) <= moving_average_price <= int(self.calcul_data[0][6]):
-                        print("오늘 주가가 120 이평선에 걸쳐있는지 확인")
+                        print("오늘 주가가 20 이평선에 걸쳐있는지 확인")
                         bottom_stock_price = True
                         check_price = int(self.calcul_data[0][6])
 
-                    # 2. 과거 일봉들이 120일 이평선보다 밑에 있는지 확인
+                    # 2. 과거 일봉들이 20일 이평선보다 밑에 있는지 확인
                     prev_low_price = 0  # 과거 일봉 주가
                     if bottom_stock_price is True:
                         moving_average_price_prev = 0
@@ -289,21 +289,21 @@ class Kiwoom(QAxWidget):
 
                         idx = 1
                         while True:
-                            if len(self.calcul_data[idx:]) < 120:   # 120일자가 있는지 계속 확인
-                                print("120일치가 없음")
+                            if len(self.calcul_data[idx:]) < 20:   # 20 있는지 계속 확인
+                                print("20일치가 없음")
                                 break
 
                             total_price = 0
-                            for value in self.calcul_data[idx:120+idx]:
+                            for value in self.calcul_data[idx:20+idx]:
                                 total_price += int(value[1])
-                            moving_average_price_prev = total_price / 120
+                            moving_average_price_prev = total_price / 20
 
-                            if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 20:
-                                print("20일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
+                            if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 5:
+                                print("5일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
                                 price_top_moving = False
                                 break
                             elif int(self.calcul_data[idx][7]) > moving_average_price_prev and idx > 20:
-                                print("120일 이평선 위에 있는 일봉 확인")
+                                print("20일 이평선 위에 있는 일봉 확인")
                                 price_top_moving = True
                                 prev_low_price = int(self.calcul_data[idx][7])  # 이평선위의 일봉 저가 저장
                                 break
@@ -352,7 +352,7 @@ class Kiwoom(QAxWidget):
             print("%s / %s : KOSDAQ Stock Code : %s is updating... " % (idx + 1, len(code_list), code))
             self.day_kiwoom_db(code=code)
 
-    def day_kiwoom_db(self, code="069500", date=None, sPrevNext="0"):
+    def day_kiwoom_db(self, code=None, date=None, sPrevNext="0"):
         QTest.qWait(3600) #3.6초마다 딜레이를 준다.
 
         self.dynamicCall("SetInputValue(QString, QString)", "종목코드", code)
