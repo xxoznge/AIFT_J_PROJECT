@@ -338,7 +338,7 @@ class Kiwoom(QAxWidget):
 
     def get_code_list_by_market(self, market_code):  # 종목분석, 관련 코드 모아놓기위한
         code_list = self.dynamicCall("GetCodeListByMarket(QString)", market_code)
-        code_list = code_list.split(';')[:200]
+        code_list = code_list.split(';')[:-1]
         return code_list
 
     def calculator_fnc(self):  # 각 종목의 정보 가져오기
