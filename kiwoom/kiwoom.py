@@ -1,12 +1,9 @@
-import os
 import sys
+import os
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import *
 from config.errorCode import *
 from PyQt5.QtTest import *
-from config.kiwoomType import *
-from config.log_class import *
-from config.slack import *
 
 class Kiwoom(QAxWidget):
     def __init__(self):
@@ -268,14 +265,14 @@ class Kiwoom(QAxWidget):
                 if self.calcul_data is None or len(self.calcul_data) < 50:
                     pass_success = False
                 else:
-                    # 데이터가 5일 이상 있으면,
+                    # 데이터가 50일 이상 있으면,
                     total_price = 0
                     for value in self.calcul_data[:50]:
                         total_price += int(value[1])
 
                     moving_average_price = total_price / 50
 
-                    # 1. 오늘자 주가가 50일 이평선에 걸쳐있는지 확인
+                    # 1. 오늘자 주가가 50 이평선에 걸쳐있는지 확인
                     bottom_stock_price = False
                     check_price = None
 
@@ -301,8 +298,8 @@ class Kiwoom(QAxWidget):
                                 total_price += int(value[1])
                             moving_average_price_prev = total_price / 50
 
-                            if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 3:
-                                print("3일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
+                            if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 5:
+                                print("5일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
                                 price_top_moving = False
                                 break
                             elif int(self.calcul_data[idx][7]) > moving_average_price_prev and idx > 50:
@@ -358,28 +355,12 @@ class Kiwoom(QAxWidget):
     def day_kiwoom_db(self, code=None, date=None, sPrevNext="0"):
         QTest.qWait(3600) #3.6초마다 딜레이를 준다.
 
-        self.dynamicCall("SetInputValue(QString, QString)", "업종코드", code)
+        self.dynamicCall("SetInputValue(QString, QString)", "종목코드", code)
+        self.dynamicCall("SetInputValue(QString, QString)", "수정주가구분", "1")
 
         if date != None:
             self.dynamicCall("SetInputValue(QString, QString)", "기준일자", date)
 
-        self.dynamicCall("CommRqData(QString, QString, int, QString)", "업종분봉조회", "opt20006", sPrevNext, self.screen_calculation_stock)
+        self.dynamicCall("CommRqData(QString, QString, int, QString)", "주식일봉차트조회", "opt10081", sPrevNext, self.screen_calculation_stock)
 
         self.calculator_event_loop.exec_()
-
-    def read_code(self):
-        if os.path.exists("files/condition_stock.txt"): # 해당 경로에 파일이 있는지 체크한다.
-            f = open("files/condition_stock.txt", "r", encoding="utf8")
-
-            lines = f.readlines() #파일에 있는 내용들이 모두 읽어와 진다.
-            for line in lines: #줄바꿈된 내용들이 한줄 씩 읽어와진다.
-                if line != "":
-                    ls = line.split("\t")
-
-                    stock_code = ls[0]
-                    stock_name = ls[1]
-                    stock_price = int(ls[2].split("\n")[0])
-                    stock_price = abs(stock_price)
-
-                    self.portfolio_stock_dict.update({stock_code:{"종목명":stock_name, "현재가":stock_price}})
-            f.close()
