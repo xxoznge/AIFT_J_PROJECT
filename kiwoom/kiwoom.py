@@ -57,8 +57,7 @@ class Kiwoom(QAxWidget):
 
         self.read_code()
         self.screen_number_setting()
-
-        QTest.qWait(5000)
+        #QTest.qWait(5000)
 
         #실시간 수신 관련 함수
         self.dynamicCall("SetRealReg(QString, QString, QString, QString)", self.screen_start_stop_real, '', self.realType.REALTYPE['장시작시간']['장운영구분'], "0")
