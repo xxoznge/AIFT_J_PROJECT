@@ -13,7 +13,7 @@ class Kiwoom(QAxWidget):
         super().__init__()
         self.realType = RealType()
         self.logging = Logging()
-        self.myMsg = MyMsg() #슬랙 동작
+        #self.myMsg = MyMsg() #슬랙 동작
 
         # print("Kiwoom() class start.")
         self.logging.logger.debug("Kiwoom() class start.")
