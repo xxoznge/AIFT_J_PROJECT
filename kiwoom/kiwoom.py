@@ -24,6 +24,9 @@ class Kiwoom(QAxWidget):
         self.calculator_event_loop = QEventLoop()
         #########################################
 
+        ##### 전체종목관리
+        self.all_stock_dick = {}
+
         ####### 계좌 관련된 변수
         self.account_stock_dict = {}
         self.not_account_stock_dict = {}
@@ -36,12 +39,20 @@ class Kiwoom(QAxWidget):
         self.total_profit_loss_rate = 0.0 #총수익률(%)
         ########################################
 
+                ######## 종목 정보 가져오기
+        self.portfolio_stock_dict = {}
+        self.jango_dict = {}
+        ########################
+
+
         # 종목분석용
         self.calcul_data = []
 
         ####### 요청 스크린 번호
         self.screen_my_info = "2000" #계좌 관련한 스크린 번호
         self.screen_calculation_stock = "4000" #계산용 스크린 번호
+        self.screen_real_stock = "5000" #종목별 할당할 스크린 번호
+        self.screen_meme_stock = "6000" #종목별 할당할 주문용 스크린 번호
         ########################################
 
         ######### 초기 셋팅 함수들 바로 실행
@@ -386,7 +397,7 @@ class Kiwoom(QAxWidget):
 
         self.calculator_event_loop.exec_()
 
-    def read_code(self):
+    def read_code(self):  # 종목 합치기 192p
         if os.path.exists("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"): # 해당 경로에 파일이 있는지 체크한다.
             #"files/condition_stock.txt"
             f = open("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt", "r", encoding="utf8")
@@ -451,6 +462,7 @@ class Kiwoom(QAxWidget):
                 self.portfolio_stock_dict.update({code: {"스크린번호": str(self.screen_real_stock), "주문용스크린번호": str(self.screen_meme_stock)}})
 
             cnt += 1
+        print (self.portfolio_stock_dict)
 
         self.logging.logger.debug(self.portfolio_stock_dict)
 
