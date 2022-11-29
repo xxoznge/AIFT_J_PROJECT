@@ -53,11 +53,13 @@ class Kiwoom(QAxWidget):
         self.screen_calculation_stock = "4000" #계산용 스크린 번호
         self.screen_real_stock = "5000" #종목별 할당할 스크린 번호
         self.screen_meme_stock = "6000" #종목별 할당할 주문용 스크린 번호
+        self.screen_start_stop_real = "1000" #장 시작/종료 실시간 스크린 번호
         ########################################
 
         ######### 초기 셋팅 함수들 바로 실행
         self.get_ocx_instance() # OCX 방식을 파이썬에 사용할 수 있게 반환해 주는 함수 실행
         self.event_slots() # 키움과 연결하기 위한 시그널 / 슬롯 모음
+        self.real_event_slots() # 실시간 이벤트 시그널 / 슬롯 연결  208p
         self.signal_login_commConnect() # 로그인 요청 함수 포함
         self.get_account_info() #계좌번호 가져오기
 
@@ -88,6 +90,9 @@ class Kiwoom(QAxWidget):
     def event_slots(self):
         self.OnEventConnect.connect(self.login_slot) # 로그인 관련 이벤트
         self.OnReceiveTrData.connect(self.trdata_slot) # 트랜잭션 요청 관련 이벤트
+
+    def real_event_slots(self):
+        self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결
 
     def signal_login_commConnect(self):
         self.dynamicCall("CommConnect()") # 로그인 요청 시그널
@@ -472,15 +477,19 @@ class Kiwoom(QAxWidget):
             value = self.dynamicCall("GetCommRealData(QString, int)", sCode, fid)
 
             if value == '0':
+                print("장 시작 전")
                 self.logging.logger.debug("장 시작 전")
 
             elif value == '3':
+                print("장 시작")
                 self.logging.logger.debug("장 시작")
 
             elif value == "2":
+                print("장 종료")
                 self.logging.logger.debug("장 종료, 동시호가로 넘어감")
 
             elif value == "4":
+                print("3시 30분 장 종료")
                 self.logging.logger.debug("3시30분 장 종료")
 
                 for code in self.portfolio_stock_dict.keys():
