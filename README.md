@@ -74,7 +74,22 @@ self.calculator_fnc()
 ### 9. 이동평균선 120일 -> 20일로 변경 ( ~ 2022.11.21 )
 > 조건 통과 종목이 매우 적은 상황이라 제대로 된 파일을 만들기 위해 파격적으로 20일로 변경  
 
-### 10. 조건 통과 종목 파일 저장 오류 해결( ~ 2022.11.26 )  
+### 10. 조건 통과 종목 파일 저장 오류 해결 ( ~ 2022.11.26 )  
 >  드디어 해결을 했습니다 .... 
+
+### 11. 보유 종목, 미체결 종목, 분석된 종목을 하나의 딕셔너리로 구성 ( ~ 2022.11.29 )   
+> portfolio_stock_dict 에서 계속 오류    
+
+ ``` python  
+def read_code(self):  
+def merge_dict(self):  
+def screen_number_setting(self):  
+ ```  
+ 
+ ###  12. 장 시간 체크 이벤트 등록, 종목 실시간 등록 스크린 번호 사용, 종목 정보 실시간 체크 ( ~ 2022.11.29 )  
+ 
+  ``` python  
+ def realdata_slot(self, sCode, sRealType, sRealData):   
+ ```  
 
 
