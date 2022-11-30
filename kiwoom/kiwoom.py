@@ -41,7 +41,7 @@ class Kiwoom(QAxWidget):
 
                 ######## 종목 정보 가져오기
         self.portfolio_stock_dict = {}
-        self.jango_dict = {}
+        self.jango_dict = {} # 263p 
         ########################
 
 
@@ -90,9 +90,11 @@ class Kiwoom(QAxWidget):
     def event_slots(self):
         self.OnEventConnect.connect(self.login_slot) # 로그인 관련 이벤트
         self.OnReceiveTrData.connect(self.trdata_slot) # 트랜잭션 요청 관련 이벤트
+        self.OnReceiveMsg.connent(self.msg_slot) # 이벤트 슬롯에 메시지 이벤트 추가 / 262p 
 
     def real_event_slots(self):
         self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결
+        self.OnReceiveChejanData.connect(self.chejan_slot) # 종목 주문체결 관련한 이벤트
 
     def signal_login_commConnect(self):
         self.dynamicCall("CommConnect()") # 로그인 요청 시그널
@@ -564,7 +566,7 @@ class Kiwoom(QAxWidget):
                         print("매도주문 전달 실패")
                         self.logging.logger.debug("매도주문 전달 실패")
 
-            elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경ㄴ
+            elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경
                 jd = self.jango_dict[sCode]
                 meme_rate = (b - jd['매입단가']) / jd['매입단가'] * 100
 
@@ -664,7 +666,7 @@ class Kiwoom(QAxWidget):
             first_buy_price = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['주문체결']['(최우선)매수호가']) # 출력: -6000
             first_buy_price = abs(int(first_buy_price))
 
-            ######## 새로 들어온 주문이면 주문번호 할당
+            ######## 새로 들어온 주문이면 주문번호 할당  # 258p 미체결정보 업데이트
             if order_number not in self.not_account_stock_dict.keys():
                 self.not_account_stock_dict.update({order_number: {}})
 
@@ -684,7 +686,7 @@ class Kiwoom(QAxWidget):
             self.not_account_stock_dict[order_number].update({"(최우선)매도호가": first_sell_price})
             self.not_account_stock_dict[order_number].update({"(최우선)매수호가": first_buy_price})
 
-        elif int(sGubun) == 1: #잔고
+        elif int(sGubun) == 1: #잔고 259p 잔고내역 업데이트
             account_num = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['잔고']['계좌번호'])
             sCode = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['잔고']['종목코드'])[1:]
 
@@ -729,7 +731,11 @@ class Kiwoom(QAxWidget):
             self.jango_dict[sCode].update({"(최우선)매도호가": first_sell_price})
             self.jango_dict[sCode].update({"(최우선)매수호가": first_buy_price})
 
-    def msg_slot(self, sScrNo, sRQName, sTrCode, msg):
+            if stock_quan == 0:
+                del self.jango_dict[sCode]
+
+    def msg_slot(self, sScrNo, sRQName, sTrCode, msg):  # 264p
+        print("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
 
     def file_delete(self):
