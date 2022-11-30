@@ -557,12 +557,14 @@ class Kiwoom(QAxWidget):
                     )
 
                     if order_success == 0:
+                        print("매도주문 전달 성공")
                         self.logging.logger.debug("매도주문 전달 성공")
                         del self.account_stock_dict[sCode]
                     else:
+                        print("매도주문 전달 실패")
                         self.logging.logger.debug("매도주문 전달 실패")
 
-            elif sCode in self.jango_dict.keys():
+            elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경ㄴ
                 jd = self.jango_dict[sCode]
                 meme_rate = (b - jd['매입단가']) / jd['매입단가'] * 100
 
@@ -577,7 +579,7 @@ class Kiwoom(QAxWidget):
                     else:
                         self.logging.logger.debug("매도주문 전달 실패")
 
-            elif d > 2.0 and sCode not in self.jango_dict:
+            elif d > 2.0 and sCode not in self.jango_dict:  # 지정가로 종목 매수 230p // 242p 에서 elif로 변경
                 self.logging.logger.debug("매수조건 통과 %s " % sCode)
 
                 result = (self.use_money * 0.1) / e
@@ -589,11 +591,13 @@ class Kiwoom(QAxWidget):
                 )
 
                 if order_success == 0:
+                    print ("매수주문 전달 성공")
                     self.logging.logger.debug("매수주문 전달 성공")
                 else:
+                    print ("매수주문 전달 실패")
                     self.logging.logger.debug("매수주문 전달 실패")
 
-            not_meme_list = list(self.not_account_stock_dict)
+            not_meme_list = list(self.not_account_stock_dict)    # 미체결 수량 매수 취소 236p 
             for order_num in not_meme_list:
                 code = self.not_account_stock_dict[order_num]["종목코드"]
                 meme_price = self.not_account_stock_dict[order_num]['주문가격']
