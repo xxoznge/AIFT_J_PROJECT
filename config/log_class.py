@@ -1,7 +1,7 @@
 import logging.config
 import datetime
 class Logging():
-    def __init__(self, config_path='config/logging.conf', log_path='log'):
+    def __init__(self, config_path='config/logging.conf', log_path='log'): # 270p
         self.logger = logging.getLogger(__name__)
 
         format = logging.Formatter("%(asctime)s | %(filename)s | %(lineno)s | %(levelname)s -> %(message)s")
