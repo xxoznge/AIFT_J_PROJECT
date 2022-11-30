@@ -87,9 +87,28 @@ def screen_number_setting(self):
  ```  
  
  ###  12. 장 시간 체크 이벤트 등록, 종목 실시간 등록 스크린 번호 사용, 종목 정보 실시간 체크 ( ~ 2022.11.29 )  
- 
+   
   ``` python  
  def realdata_slot(self, sCode, sRealType, sRealData):   
  ```  
+### 13. 지정가로 종목 매수하기, 미체결 수량 매수 취소하기, 시장가로 종목 매도하기 ( ~ 2022.11.30 )  
+  
+  ``` python  
+ def realdata_slot(self, sCode, sRealType, sRealData):   
+ ``` 
+ 
+### 14. 실시간 체결정보 확인, 체결 정보 데이터 받기, 변경된 잔고내역 데이터 받기, 서버에서 메세지 받기 ( ~ 2022.11.30 ) 
+
+  ``` python  
+ def realdata_slot(self, sCode, sRealType, sRealData):   
+ def chejan_slot(self, sGubun, nItemCnt, sFidList):  
+ def msg_slot(self, sScrNo, sRQName, sTrCode, msg):  
+ ``` 
+ 
+### 15. 장 종료 후 - 연결 끊기, 종목 분석, 프로그램 종료 ( ~ 2022.11.30 ) 
+### 16. 로깅, 슬랙메세지 ( ~ 2022.11.30 ) 
+> 슬랙 메세지 준비  
+>> https://api.slack.com/apps에서 토큰받기
+>> slcak.py -> 토큰 복사
 
 
