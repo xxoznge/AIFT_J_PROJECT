@@ -1,7 +1,9 @@
 import sys
+
 import config
 sys.path.append("C:\\sers\\USER\\AIFT-J\\yeji")
 sys.path.append("C:\\Users\\SOJUNG\\Documents\\GitHub\\yeji")
+sys.path.append("C:\\Users\\erosi\\Documents\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
 from PyQt5.QtWidgets import *
@@ -12,8 +14,7 @@ class Main():
     print("Main() start")
 
     self.app = QApplication(sys.argv) # PyQt5로 실행할 파일명을 자동 설정
-    self.kiwoom = Kiwoom() # 키움 클래스 객체화
-    
+    self.kiwoom = Kiwoom() # 키움 클래스 객체화    
     self.app.exec_() # 이벤트 루프 실행
 
 if __name__ == "__main__":
