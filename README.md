@@ -118,6 +118,7 @@ def screen_number_setting(self):
 >> https://api.slack.com/apps에서 토큰받기  
 >> slcak.py -> 토큰 복사  
 >> requests 모듈 설치 -> pip install requests  
+
 > config file  
 >> log_class.py / slack.py  
 
