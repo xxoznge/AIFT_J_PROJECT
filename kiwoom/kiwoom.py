@@ -490,7 +490,7 @@ class Kiwoom(QAxWidget):
                 print("장 종료")
                 self.logging.logger.debug("장 종료, 동시호가로 넘어감")
 
-            elif value == "4":
+            elif value == "4": # 265p 실시간 연결 모두 끊기
                 print("3시 30분 장 종료")
                 self.logging.logger.debug("3시30분 장 종료")
 
@@ -499,10 +499,10 @@ class Kiwoom(QAxWidget):
 
                 QTest.qWait(5000)
 
-                self.file_delete()
+                self.file_delete()  # 종목 분석 266p
                 self.calculator_fnc()
 
-                sys.exit()
+                sys.exit()  # 프로그램 자동 종료
 
         elif sRealType == "주식체결":
             a = self.dynamicCall("GetCommRealData(QString, int)", sCode, self.realType.REALTYPE[sRealType]['체결시간']) # 출력 HHMMSS
@@ -738,6 +738,6 @@ class Kiwoom(QAxWidget):
         print("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
 
-    def file_delete(self):
+    def file_delete(self):  # 266p 저장된 파일 삭제
         if os.path.isfile("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"):
             os.remove("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt")
