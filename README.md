@@ -105,10 +105,20 @@ def screen_number_setting(self):
  def msg_slot(self, sScrNo, sRQName, sTrCode, msg):  
  ``` 
  
-### 15. 장 종료 후 - 연결 끊기, 종목 분석, 프로그램 종료 ( ~ 2022.11.30 ) 
+### 15. 장 종료 후 - 연결 끊기, 종목 분석, 프로그램 종료 ( ~ 2022.11.30 )  
+
+
+  ``` python  
+ def realdata_slot(self, sCode, sRealType, sRealData):   
+ def file_delete(self):   
+ ``` 
+ 
 ### 16. 로깅, 슬랙메세지 ( ~ 2022.11.30 ) 
 > 슬랙 메세지 준비  
->> https://api.slack.com/apps에서 토큰받기
->> slcak.py -> 토큰 복사
+>> https://api.slack.com/apps에서 토큰받기  
+>> slcak.py -> 토큰 복사  
+>> requests 모듈 설치 -> pip install requests  
+> config file  
+>> log_class.py / slack.py  
 
 
