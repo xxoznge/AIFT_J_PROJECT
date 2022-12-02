@@ -12,11 +12,11 @@ class Kiwoom(QAxWidget):
     def __init__(self):
         super().__init__()
         self.realType = RealType()
-        self.logging = Logging()
+        self.logging = Logging() #로그 인스턴스 
         self.myMsg = MyMsg() #슬랙 동작
 
         # print("Kiwoom() class start.")
-        self.logging.logger.debug("Kiwoom() class start.")
+        self.logging.logger.debug("Kiwoom() class start.") # 로그 형태로 변경
 
         ####### event loop를 실행하기 위한 변수 모음
         self.login_event_loop = QEventLoop() # 로그인 요청용 이벤트 루프
@@ -41,7 +41,7 @@ class Kiwoom(QAxWidget):
 
                 ######## 종목 정보 가져오기
         self.portfolio_stock_dict = {}
-        self.jango_dict = {} # 263p 
+        self.jango_dict = {}
         ########################
 
 
@@ -90,15 +90,14 @@ class Kiwoom(QAxWidget):
     def event_slots(self):
         self.OnEventConnect.connect(self.login_slot) # 로그인 관련 이벤트
         self.OnReceiveTrData.connect(self.trdata_slot) # 트랜잭션 요청 관련 이벤트
-        self.OnReceiveMsg.connect(self.msg_slot) # 이벤트 슬롯에 메시지 이벤트 추가 / 262p 
+        self.OnReceiveMsg.connect(self.msg_slot) 
 
     def real_event_slots(self):
         self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결
-        self.OnReceiveChejanData.connect(self.chejan_slot) # 종목 주문체결 관련한 이벤트
+        self.OnReceiveChejanData.connect(self.chejan_slot)  # 종목 주문체결 관련한 이벤트
 
     def signal_login_commConnect(self):
         self.dynamicCall("CommConnect()") # 로그인 요청 시그널
-
         self.login_event_loop.exec_() # 이벤트 루프 실행
 
     def login_slot(self, err_code):
@@ -116,6 +115,7 @@ class Kiwoom(QAxWidget):
         print("계좌번호 : %s" % account_num)
 
     def detail_account_info(self, sPrevNext="0"):
+        print("예수금을 요청하는 부분")
         self.dynamicCall("SetInputValue(QString, QString)", "계좌번호", self.account_num)
         self.dynamicCall("SetInputValue(QString, QString)", "비밀번호", "0000")
         self.dynamicCall("SetInputValue(QString, QString)", "비밀번호입력매체구분", "00")
@@ -125,6 +125,7 @@ class Kiwoom(QAxWidget):
         self.detail_account_info_event_loop.exec_()
 
     def detail_account_mystock(self, sPrevNext="0"):
+        print("계좌평가잔고내역을 요청하는 부분")
         self.dynamicCall("SetInputValue(QString, QString)", "계좌번호", self.account_num)
         self.dynamicCall("SetInputValue(QString, QString)", "비밀번호", "0000")
         self.dynamicCall("SetInputValue(QString, QString)", "비밀번호입력매체구분", "00")
@@ -219,8 +220,10 @@ class Kiwoom(QAxWidget):
         elif sRQName == "실시간미체결요청":    # 미체결 종목 요청의 데이터 반환
             rows = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)
 
-            for i in range(rows):
-                code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목코드")
+            if rows > 0:
+
+                for i in range(rows):
+                    code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목코드")
 
                 code_nm = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목명")
                 order_no = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "주문번호")
@@ -257,15 +260,19 @@ class Kiwoom(QAxWidget):
                 self.not_account_stock_dict[order_no].update({'체결량': ok_quantity})
 
                 print("미체결 종목 : %s " % self.not_account_stock_dict[order_no])
-
+        
+            else:
+                print("미체결 종목이 없습니다.")
+                
+              
             self.detail_account_info_event_loop.exit()
 
         elif sRQName == "주식일봉차트조회":
             code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, 0, "종목코드")
             code = code.strip()  # 여기서부터 일봉데이터 가져오기 175p 
            
-
             cnt = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)  # 최대 600일
+            print(cnt)
             
 
             # data = self.dynamicCall("GetCommDataEx(QString, QString)", sTrCode, sRQName)
@@ -421,6 +428,7 @@ class Kiwoom(QAxWidget):
 
                     self.portfolio_stock_dict.update({stock_code:{"종목명":stock_name, "현재가":stock_price}})
             f.close()
+            print(self.portfolio_stock_dict)
 
     def merge_dict(self):
         self.all_stock_dict.update({"계좌평가잔고내역": self.account_stock_dict})
@@ -566,7 +574,7 @@ class Kiwoom(QAxWidget):
                         print("매도주문 전달 실패")
                         self.logging.logger.debug("매도주문 전달 실패")
 
-            elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경
+            elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경ㄴ
                 jd = self.jango_dict[sCode]
                 meme_rate = (b - jd['매입단가']) / jd['매입단가'] * 100
 
@@ -666,7 +674,7 @@ class Kiwoom(QAxWidget):
             first_buy_price = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['주문체결']['(최우선)매수호가']) # 출력: -6000
             first_buy_price = abs(int(first_buy_price))
 
-            ######## 새로 들어온 주문이면 주문번호 할당  # 258p 미체결정보 업데이트
+            ######## 새로 들어온 주문이면 주문번호 할당
             if order_number not in self.not_account_stock_dict.keys():
                 self.not_account_stock_dict.update({order_number: {}})
 
@@ -686,7 +694,7 @@ class Kiwoom(QAxWidget):
             self.not_account_stock_dict[order_number].update({"(최우선)매도호가": first_sell_price})
             self.not_account_stock_dict[order_number].update({"(최우선)매수호가": first_buy_price})
 
-        elif int(sGubun) == 1: #잔고 259p 잔고내역 업데이트
+        elif int(sGubun) == 1: #잔고
             account_num = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['잔고']['계좌번호'])
             sCode = self.dynamicCall("GetChejanData(int)", self.realType.REALTYPE['잔고']['종목코드'])[1:]
 
@@ -731,11 +739,7 @@ class Kiwoom(QAxWidget):
             self.jango_dict[sCode].update({"(최우선)매도호가": first_sell_price})
             self.jango_dict[sCode].update({"(최우선)매수호가": first_buy_price})
 
-            if stock_quan == 0:
-                del self.jango_dict[sCode]
-
-    def msg_slot(self, sScrNo, sRQName, sTrCode, msg):  # 264p
-        print("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
+    def msg_slot(self, sScrNo, sRQName, sTrCode, msg):
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
 
     def file_delete(self):  # 266p 저장된 파일 삭제
