@@ -124,4 +124,19 @@ def screen_number_setting(self):
 > * config file  
 > log_class.py / slack.py  
 
+### 17. 매수매도 오류 ( 2022.12.01 )
+> 로그 파일 확인 : 모의투자 정정 / 취소할 수량이 없습니다.  
 
+### 18. 매수매도 수정 ( 2022.12.02 )
+> 수정은 했지만 장 시간 종료로 확인 X ( 2022.12.04 까지 )  
+
+  ``` python   
+  def real_event_slots(self):  
+    self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결    
+    self.OnReceiveChejanData.connect(self.chejan_slot)  # 종목 주문체결 관련한 이벤트   
+ ```  
+   
+   ``` python   
+def realdata_slot(self, sCode, sRealType, sRealData):  
+def chejan_slot(self, sGubun, nItemCnt, sFidList):   
+ ```  
