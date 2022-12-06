@@ -68,9 +68,11 @@ class Kiwoom(QAxWidget):
         self.not_concluded_account() # 미체결
         #self.calculator_fnc() # 코스닥갯수 - 일봉데이터 안가져오려면 주석처리하기
 
+        QTest.qWait(10000)
         self.read_code()
         self.screen_number_setting()
-        #QTest.qWait(5000)
+
+        QTest.qWait(5000)
 
         #실시간 수신 관련 함수
         self.dynamicCall("SetRealReg(QString, QString, QString, QString)", self.screen_start_stop_real, '', self.realType.REALTYPE['장시작시간']['장운영구분'], "0")
@@ -112,7 +114,7 @@ class Kiwoom(QAxWidget):
 
         self.account_num = account_num
 
-        print("계좌번호 : %s" % account_num)
+        self.logging.logger.debug("계좌번호 : %s" % account_num)
 
     def detail_account_info(self, sPrevNext="0"):
         print("예수금을 요청하는 부분")
@@ -605,6 +607,7 @@ class Kiwoom(QAxWidget):
 
                 if order_success == 0:
                     self.logging.logger.debug("매수주문 전달 성공")
+                    
                 else:
                     self.logging.logger.debug("매수주문 전달 실패")
 
