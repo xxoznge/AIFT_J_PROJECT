@@ -129,7 +129,6 @@ def screen_number_setting(self):
 
 ### 18. 매수매도 수정 ( 2022.12.02 )
 > 수정은 했지만 장 시간 종료로 확인 X ( 2022.12.04 까지 )  
-> 12 / 05에도 장 종료돼서 확인 못함 ( 학교 수업,,, )
 
   ``` python   
   def real_event_slots(self):  
