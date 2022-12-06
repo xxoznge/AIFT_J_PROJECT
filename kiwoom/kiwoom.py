@@ -544,9 +544,6 @@ class Kiwoom(QAxWidget):
             k = self.dynamicCall("GetCommRealData(QString, int)", sCode, self.realType.REALTYPE[sRealType]['저가']) # 출력 : +(-)2530
             k = abs(int(k))
 
-            if sCode not in self.portfolio_stock_dict:
-                self.portfolio_stock_dict.update({sCode: {}})
-
             self.portfolio_stock_dict[sCode].update({"체결시간": a})
             self.portfolio_stock_dict[sCode].update({"현재가": b})
             self.portfolio_stock_dict[sCode].update({"전일대비": c})
@@ -559,8 +556,6 @@ class Kiwoom(QAxWidget):
             self.portfolio_stock_dict[sCode].update({"시가": j})
             self.portfolio_stock_dict[sCode].update({"저가": k})
 
-            print(self.portfolio_stock_dict[sCode])
-
             if sCode in self.account_stock_dict.keys() and sCode not in self.jango_dict.keys():
                 asd = self.account_stock_dict[sCode]
                 meme_rate = (b - asd['매입가']) / asd['매입가'] * 100
@@ -572,9 +567,11 @@ class Kiwoom(QAxWidget):
                     )
 
                     if order_success == 0:
+                        print("매도주문 전달 성공")
                         self.logging.logger.debug("매도주문 전달 성공")
                         del self.account_stock_dict[sCode]
                     else:
+                        print("매도주문 전달 실패")
                         self.logging.logger.debug("매도주문 전달 실패")
 
             elif sCode in self.jango_dict.keys():  # 244p 에서 elif로 변경ㄴ
@@ -604,12 +601,13 @@ class Kiwoom(QAxWidget):
                 )
 
                 if order_success == 0:
+                    print ("매수주문 전달 성공")
                     self.logging.logger.debug("매수주문 전달 성공")
                 else:
+                    print ("매수주문 전달 실패")
                     self.logging.logger.debug("매수주문 전달 실패")
 
             not_meme_list = list(self.not_account_stock_dict)    # 미체결 수량 매수 취소 236p 
-            
             for order_num in not_meme_list:
                 code = self.not_account_stock_dict[order_num]["종목코드"]
                 meme_price = self.not_account_stock_dict[order_num]['주문가격']
