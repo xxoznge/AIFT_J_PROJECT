@@ -222,9 +222,10 @@ class Kiwoom(QAxWidget):
         elif sRQName == "실시간미체결요청":    # 미체결 종목 요청의 데이터 반환
             rows = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)
 
-            for i in range(rows):
-                
-                code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목코드")
+            if rows > 0:
+
+                for i in range(rows):
+                    code = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목코드")
 
                 code_nm = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "종목명")
                 order_no = self.dynamicCall("GetCommData(QString, QString, int, QString)", sTrCode, sRQName, i, "주문번호")
@@ -262,6 +263,10 @@ class Kiwoom(QAxWidget):
 
                 print("미체결 종목 : %s " % self.not_account_stock_dict[order_no])
         
+            else:
+                print("미체결 종목이 없습니다.")
+                
+              
             self.detail_account_info_event_loop.exit()
 
         elif sRQName == "주식일봉차트조회":
@@ -269,7 +274,7 @@ class Kiwoom(QAxWidget):
             code = code.strip()  # 여기서부터 일봉데이터 가져오기 175p 
            
             cnt = self.dynamicCall("GetRepeatCnt(QString, QString)", sTrCode, sRQName)  # 최대 600일
-            
+            print(cnt)
             
 
             # data = self.dynamicCall("GetCommDataEx(QString, QString)", sTrCode, sRQName)
@@ -738,9 +743,6 @@ class Kiwoom(QAxWidget):
             self.jango_dict[sCode].update({"매도매수구분": meme_gubun})
             self.jango_dict[sCode].update({"(최우선)매도호가": first_sell_price})
             self.jango_dict[sCode].update({"(최우선)매수호가": first_buy_price})
-
-            if stock_quan == 0:
-                del self.jango_dict[sCode]
 
     def msg_slot(self, sScrNo, sRQName, sTrCode, msg):
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
