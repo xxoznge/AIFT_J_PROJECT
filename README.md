@@ -114,14 +114,12 @@ def screen_number_setting(self):
  ``` 
  
 ### 16. 로깅, 슬랙메세지 ( ~ 2022.11.30 ) 
-> 로깅 / 슬랙메세지 (노트북, 핸드폰 알람) 확인  
->  
-> * 슬랙메세지  
-> https://api.slack.com/apps에서 토큰받기  
-> slcak.py -> 토큰 복사  
-> requests 모듈 설치 -> pip install requests  
->  
-> * config file  
-> log_class.py / slack.py  
+> 슬랙 메세지 준비  
+>> https://api.slack.com/apps에서 토큰받기  
+>> slcak.py -> 토큰 복사  
+>> requests 모듈 설치 -> pip install requests  
+
+> config file  
+>> log_class.py / slack.py  
 
 
