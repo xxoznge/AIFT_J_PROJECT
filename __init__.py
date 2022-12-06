@@ -1,8 +1,6 @@
 import sys
 
 import config
-sys.path.append("C:\\sers\\USER\\AIFT-J\\yeji")
-sys.path.append("C:\\Users\\SOJUNG\\Documents\\GitHub\\yeji")
 sys.path.append("C:\\Users\\erosi\\Documents\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
