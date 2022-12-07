@@ -581,7 +581,7 @@ class Kiwoom(QAxWidget):
                     else:
                         self.logging.logger.debug("매도주문 전달 실패")
 
-            elif d > 2.0 and sCode not in self.jango_dict:  # 지정가로 종목 매수 230p // 242p 에서 elif로 변경
+            elif d > 1.0 and sCode not in self.jango_dict:  # 지정가로 종목 매수 230p // 242p 에서 elif로 변경
                 self.logging.logger.debug("매수조건 통과 %s " % sCode)
 
                 result = (self.use_money * 0.1) / e
