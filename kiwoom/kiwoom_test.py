@@ -344,7 +344,7 @@ class Kiwoom(QAxWidget):
         return code_list
 
     # tr_dic = {
-    #             'opt20005': {'001': 'kospi', '201': 'kospi200'},
+    #             'opt20005': {'001': '', '201': 'kospi200'},
     #             'opt10080': {'069500':'kodex_200', '114800':'kodex_inverse', '226490':'kodex_kospi'}
     #        }
 
