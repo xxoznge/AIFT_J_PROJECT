@@ -1,4 +1,7 @@
 import sys
+
+
+
 sys.path.append("C:\\Users\\erosi\\Documents\\GitHub\\yeji")
 
 from kiwoom.kiwoom import *
