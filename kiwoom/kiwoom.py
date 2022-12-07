@@ -499,7 +499,7 @@ class Kiwoom(QAxWidget):
 
                 QTest.qWait(5000)
 
-                self.file_delete()  # 종목 분석 266p
+                # self.file_delete()  # 종목 분석 266p
                 self.calculator_fnc()
 
                 sys.exit()  # 프로그램 자동 종료
@@ -593,10 +593,10 @@ class Kiwoom(QAxWidget):
                 )
 
                 if order_success == 0:
-                    print ("매수주문 전달 성공")
+                    
                     self.logging.logger.debug("매수주문 전달 성공")
                 else:
-                    print ("매수주문 전달 실패")
+
                     self.logging.logger.debug("매수주문 전달 실패")
 
             not_meme_list = list(self.not_account_stock_dict)    # 미체결 수량 매수 취소 236p 
@@ -738,6 +738,6 @@ class Kiwoom(QAxWidget):
         print("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
 
-    def file_delete(self):  # 266p 저장된 파일 삭제
-        if os.path.isfile("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"):
-            os.remove("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt")
+    #def file_delete(self):  # 266p 저장된 파일 삭제
+        #if os.path.isfile("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"):
+           # os.remove("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt")
