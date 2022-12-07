@@ -90,7 +90,7 @@ class Kiwoom(QAxWidget):
     def event_slots(self):
         self.OnEventConnect.connect(self.login_slot) # 로그인 관련 이벤트
         self.OnReceiveTrData.connect(self.trdata_slot) # 트랜잭션 요청 관련 이벤트
-        self.OnReceiveMsg.connent(self.msg_slot) # 이벤트 슬롯에 메시지 이벤트 추가 / 262p 
+        self.OnReceiveMsg.connect(self.msg_slot) # 이벤트 슬롯에 메시지 이벤트 추가 / 262p 
 
     def real_event_slots(self):
         self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결

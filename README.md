@@ -3,7 +3,7 @@
 2022-2 SSWU PROJECT  
 * Artificial Intelligence in Financial Trade Project  
 * 손가락 하나 까딱하지 않는 주식 거래 시스템 구축 (참고)  
- 
+* Github, Slack 
 ## 현재 진행상황  
 
 ### 1. 키움 API 설치 및 환경설정  
@@ -105,10 +105,13 @@ def screen_number_setting(self):
  def msg_slot(self, sScrNo, sRQName, sTrCode, msg):  
  ``` 
  
-### 15. 장 종료 후 - 연결 끊기, 종목 분석, 프로그램 종료 ( ~ 2022.11.30 ) 
-### 16. 로깅, 슬랙메세지 ( ~ 2022.11.30 ) 
-> 슬랙 메세지 준비  
->> https://api.slack.com/apps에서 토큰받기
->> slcak.py -> 토큰 복사
+### 15. 장 종료 후 - 연결 끊기, 종목 분석, 프로그램 종료 ( ~ 2022.11.30 )  
+
+
+  ``` python  
+ def realdata_slot(self, sCode, sRealType, sRealData):   
+ def file_delete(self):   
+ ``` 
+ 
 
 
