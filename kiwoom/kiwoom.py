@@ -600,25 +600,25 @@ class Kiwoom(QAxWidget):
                     self.logging.logger.debug("매수주문 전달 실패")
 
             not_meme_list = list(self.not_account_stock_dict)    # 미체결 수량 매수 취소 236p 
-            for order_num in not_meme_list:
-                code = self.not_account_stock_dict[order_num]["종목코드"]
-                meme_price = self.not_account_stock_dict[order_num]['주문가격']
-                not_quantity = self.not_account_stock_dict[order_num]['미체결수량']
-                order_gubun = self.not_account_stock_dict[order_num]['주문구분']
+            # for order_num in not_meme_list:
+            #     code = self.not_account_stock_dict[order_num]["종목코드"]
+            #     meme_price = self.not_account_stock_dict[order_num]['주문가격']
+            #     not_quantity = self.not_account_stock_dict[order_num]['미체결수량']
+            #     order_gubun = self.not_account_stock_dict[order_num]['주문구분']
 
-                if order_gubun == "매수" and not_quantity > 0 and e > meme_price:
-                    order_success = self.dynamicCall(
-                        "SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
-                        ["매수취소", self.portfolio_stock_dict[sCode]["주문용스크린번호"], self.account_num, 3, code, 0, 0, self.realType.SENDTYPE['거래구분']['지정가'], order_num]
-                    )
+            #     if order_gubun == "매수" and not_quantity > 0 and e > meme_price:
+            #         order_success = self.dynamicCall(
+            #             "SendOrder(QString, QString, QString, int, QString, int, int, QString, QString)",
+            #             ["매수취소", self.portfolio_stock_dict[sCode]["주문용스크린번호"], self.account_num, 3, code, 0, 0, self.realType.SENDTYPE['거래구분']['지정가'], order_num]
+            #         )
 
-                    if order_success == 0:
-                        self.logging.logger.debug("매수취소 전달 성공")
-                    else:
-                        self.logging.logger.debug("매수취소 전달 실패")
+            #         if order_success == 0:
+            #             self.logging.logger.debug("매수취소 전달 성공")
+            #         else:
+            #             self.logging.logger.debug("매수취소 전달 실패")
 
-                elif not_quantity == 0:
-                    del self.not_account_stock_dict[order_num]
+            #     elif not_quantity == 0:
+            #         del self.not_account_stock_dict[order_num]
 
     def chejan_slot(self, sGubun, nItemCnt, sFidList):
         if int(sGubun) == 0: #주문체결
