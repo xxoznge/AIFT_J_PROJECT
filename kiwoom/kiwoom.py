@@ -300,27 +300,27 @@ class Kiwoom(QAxWidget):
 
                 pass_success = False
 
-                # 15일 이평선을 그릴만큼의 데이터가 있는지 확인
-                if self.calcul_data is None or len(self.calcul_data) < 15:
+                # 5일 이평선을 그릴만큼의 데이터가 있는지 확인
+                if self.calcul_data is None or len(self.calcul_data) < 5:
                     pass_success = False
                 else:
-                    # 데이터가 15일 이상 있으면,
+                    # 데이터가 5일 이상 있으면,
                     total_price = 0
-                    for value in self.calcul_data[:15]:
+                    for value in self.calcul_data[:5]:
                         total_price += int(value[1])
 
-                    moving_average_price = total_price / 15
+                    moving_average_price = total_price / 5
 
-                    # 1. 오늘자 주가가 15 이평선에 걸쳐있는지 확인
+                    # 1. 오늘자 주가가 5 이평선에 걸쳐있는지 확인
                     bottom_stock_price = False
                     check_price = None
 
                     if int(self.calcul_data[0][7]) <= moving_average_price <= int(self.calcul_data[0][6]):
-                        print("오늘 주가가 15 이평선에 걸쳐있는지 확인")
+                        print("오늘 주가가 5 이평선에 걸쳐있는지 확인")
                         bottom_stock_price = True
                         check_price = int(self.calcul_data[0][6])
 
-                    # 2. 과거 일봉들이 15일 이평선보다 밑에 있는지 확인
+                    # 2. 과거 일봉들이 5일 이평선보다 밑에 있는지 확인
                     prev_low_price = 0  # 과거 일봉 주가
                     if bottom_stock_price is True:
                         moving_average_price_prev = 0
@@ -328,21 +328,21 @@ class Kiwoom(QAxWidget):
 
                         idx = 1
                         while True:
-                            if len(self.calcul_data[idx:]) < 15:   # 15 있는지 계속 확인
-                                print("15일치가 없음")
+                            if len(self.calcul_data[idx:]) < 5:   # 5 있는지 계속 확인
+                                print("5일치가 없음")
                                 break
 
                             total_price = 0
-                            for value in self.calcul_data[idx:15+idx]:
+                            for value in self.calcul_data[idx:5+idx]:
                                 total_price += int(value[1])
-                            moving_average_price_prev = total_price / 15
+                            moving_average_price_prev = total_price / 5
 
                             if moving_average_price_prev <= int(self.calcul_data[idx][6]) and idx <= 3:
                                 print("3일 동안 주가가 이평선과 같거나 위에 있으면 조건 탈락")
                                 price_top_moving = False
                                 break
-                            elif int(self.calcul_data[idx][7]) > moving_average_price_prev and idx > 15:
-                                print("15일 이평선 위에 있는 일봉 확인")
+                            elif int(self.calcul_data[idx][7]) > moving_average_price_prev and idx > 5:
+                                print("5일 이평선 위에 있는 일봉 확인")
                                 price_top_moving = True
                                 prev_low_price = int(self.calcul_data[idx][7])  # 이평선위의 일봉 저가 저장
                                 break
@@ -738,6 +738,6 @@ class Kiwoom(QAxWidget):
         print("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
         self.logging.logger.debug("스크린: %s, 요청이름: %s, tr코드: %s --- %s" %(sScrNo, sRQName, sTrCode, msg))
 
-    #def file_delete(self):  # 266p 저장된 파일 삭제
-        #if os.path.isfile("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"):
-           # os.remove("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt")
+    def file_delete(self):  # 266p 저장된 파일 삭제
+        if os.path.isfile("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt"):
+           os.remove("C:/Users/erosi/OneDrive/문서/GitHub/yeji/condition_stock.txt")
