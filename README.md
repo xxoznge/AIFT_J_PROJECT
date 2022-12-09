@@ -146,6 +146,7 @@ def screen_number_setting(self):
 def realdata_slot(self, sCode, sRealType, sRealData):  
 def chejan_slot(self, sGubun, nItemCnt, sFidList):   
  ```  
+ 
 ### 19. 매수매도 수정 후 오류 / 해결 ( 2022.12.06 )  
 > 수정 후 잘 돌아가다가 오류  
 > 로그 파일 확인 : 종목 관련 정보 반복 출력  
@@ -162,6 +163,11 @@ def chejan_slot(self, sGubun, nItemCnt, sFidList):
 > 조건에 맞는 종목 아예 없음  
 > 등락율 d > 2.0 -> d > 1.0 수정
 > 최종 조건 : 이동평균선 5일, 등락율 d > 1.0  
+
+ ``` python 
+elif d > 1.0 and sCode not in self.jango_dict:  # 지정가로 종목 매수 230p // 242p 에서 elif로 변경
+                self.logging.logger.debug("매수조건 통과 %s " % sCode)
+ ```  
 
 ### 23. 매수 결과 ( 2022.12.08 )
 > 과거 일봉데이터 가져오면 가격이 안맞아서 매수 성공 후 매수 최소 전달됨.  
