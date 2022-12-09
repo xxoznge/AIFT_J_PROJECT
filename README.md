@@ -1,9 +1,15 @@
-# AIFT_J_PROJECT
+# AIFT_J_PROJECT  
+
+TEAM-J Collaborator  
+* xxoznge 20201049 이소정  
+* YeJiKim06 20201029 김예지  
+* jinjoo-jung 20201058 정진주  
 
 2022-2 SSWU PROJECT  
 * Artificial Intelligence in Financial Trade Project  
 * 손가락 하나 까딱하지 않는 주식 거래 시스템 구축 (참고)  
-* Github, Slack 
+* Github, Slack   
+
 ## 현재 진행상황  
 
 ### 1. 키움 API 설치 및 환경설정  
