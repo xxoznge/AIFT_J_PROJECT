@@ -165,7 +165,7 @@ def chejan_slot(self, sGubun, nItemCnt, sFidList):
 > 최종 조건 : 이동평균선 5일, 등락율 d > 1.0  
 
  ``` python 
-elif d > 1.0 and sCode not in self.jango_dict:  # 지정가로 종목 매수 230p // 242p 에서 elif로 변경
+elif d > 1.0 and sCode not in self.jango_dict:  
                 self.logging.logger.debug("매수조건 통과 %s " % sCode)
  ```  
 
