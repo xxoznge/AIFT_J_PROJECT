@@ -112,6 +112,58 @@ def screen_number_setting(self):
  def realdata_slot(self, sCode, sRealType, sRealData):   
  def file_delete(self):   
  ``` 
- 
+ ### 16. 로깅, 슬랙메세지 ( ~ 2022.11.30 ) 
+> 로깅 / 슬랙메세지 (노트북, 핸드폰 알람) 확인  
+* 슬랙메세지  
+>> https://api.slack.com/apps에서 토큰받기  
+>> slcak.py -> 토큰 복사  
+>> requests 모듈 설치 -> pip install requests  
+* config file  
+>> log_class.py / slack.py  
+>  
+> * 슬랙메세지  
+> https://api.slack.com/apps에서 토큰받기  
+> slcak.py -> 토큰 복사  
+> requests 모듈 설치 -> pip install requests  
+>  
+> * config file  
+> log_class.py / slack.py  
 
+### 17. 매수매도 오류 ( 2022.12.01 )
+> 로그 파일 확인 : 모의투자 정정 / 취소할 수량이 없습니다.  
 
+### 18. 매수매도 수정 ( 2022.12.02 )
+> 수정은 했지만 장 시간 종료로 확인 X ( 2022.12.04 까지 )  
+> 12 / 05에도 장 종료돼서 확인 못함 ( 학교 수업 )  
+
+  ``` python   
+  def real_event_slots(self):  
+    self.OnReceiveRealData.connect(self.realdata_slot) # 실시간 이벤트 연결    
+    self.OnReceiveChejanData.connect(self.chejan_slot)  # 종목 주문체결 관련한 이벤트   
+ ```  
+
+   ``` python   
+def realdata_slot(self, sCode, sRealType, sRealData):  
+def chejan_slot(self, sGubun, nItemCnt, sFidList):   
+ ```  
+### 19. 매수매도 수정 후 오류 / 해결 ( 2022.12.06 )  
+> 수정 후 잘 돌아가다가 오류  
+> 로그 파일 확인 : 종목 관련 정보 반복 출력  
+> 깃허브 데스크탑 Revert 후 12/2 코드로 다시 돌려놓기 - 오류 해결
+> 모의투자 정정 / 취소할 수량이 없습니다. - 오류 해결  
+  
+### 20. 매도 성공 ( 2022.12.06 )  
+> 보유하고 있는 종목 ( 삼성전자 ) : 매도조건에 맞아서 매도 성공  
+
+### 21. 미체결 종목 매수취소 성공 ( 2022.12.07 )  
+> 다른 가격으로 매수 -> 매수 취소 전달 성공  
+
+### 22. 매수 조건 ( 등락율 ) 수정 ( 2022.12.07 )  
+> 조건에 맞는 종목 아예 없음  
+> 등락율 d > 2.0 -> d > 1.0 수정
+> 최종 조건 : 이동평균선 5일, 등락율 d > 1.0  
+
+### 23. 매수 결과 ( 2022.12.08 )
+> 과거 일봉데이터 가져오면 가격이 안맞아서 매수 성공 후 매수 최소 전달됨.  
+> 매수 오류는 없으나 조건 통과 종목이 없어서 매수 불가능.    
+> 장 종료(주말)로 인해 12/11일까지 매수 불가능. 
